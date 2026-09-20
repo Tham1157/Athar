@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  [PROJECT NAME] — CSR Partnership Pitch Deck                ║
+  ║  Bilingual: English ↔ Arabic with live toggle               ║
+  ║                                                              ║
+  ║  HOW TO EDIT TEXT:                                           ║
+  ║  All text lives in the LANG object at the bottom of this    ║
+  ║  file — search for "var LANG". Each slide has an 'en' and   ║
+  ║  'ar' version. Edit there, not in the HTML body.            ║
+  ║                                                              ║
+  ║  Placeholders: [Project Name], [Sponsor Name], etc.         ║
+  ║  Colors: CSS variables under :root at the top.              ║
+  ║                                                              ║
+  ║  HOW TO HOST (free):                                         ║
+  ║  • GitHub Pages — push as index.html, enable Pages.         ║
+  ║  • Netlify Drop — drag file to app.netlify.com/drop.        ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+
+<title>[Project Name] — CSR Partnership Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:           #0C0F1A;
+  --bg-card:      #1A1F35;
+  --text:         #E8EAF0;
+  --text-muted:   #7B829E;
+  --accent:       #3ECFA5;
+  --accent-dim:   rgba(62,207,165,0.12);
+  --white:        #FFFFFF;
+  --font-body:    'Inter', -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg:#F5F6FA; --bg-card:#FFFFFF; --text:#1A1F35;
+    --text-muted:#6B7194; --accent:#1B9E76;
+    --accent-dim:rgba(27,158,118,0.08); --white:#1A1F35;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#0C0F1A; --bg-card:#1A1F35; --text:#E8EAF0;
+  --text-muted:#7B829E; --accent:#3ECFA5;
+  --accent-dim:rgba(62,207,165,0.12); --white:#FFFFFF;
+}
+/* Arabic font swap */
+html[lang="ar"] {
+  --font-body:    'Noto Kufi Arabic', 'Inter', sans-serif;
+  --font-display: 'Noto Kufi Arabic', 'Playfair Display', serif;
+}
+
+*, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+html, body {
+  height: 100%; background: var(--bg); color: var(--text);
+  font-family: var(--font-body);
+  overflow: hidden; -webkit-font-smoothing: antialiased;
+}
+
+#deck { position: relative; width: 100%; height: 100%; height: 100dvh; }
+.slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(env(safe-area-inset-top,0px) + 5.5vh) 8vw calc(env(safe-area-inset-bottom,0px) + 9vh);
+  opacity: 0; pointer-events: none;
+  transition: opacity .45s ease;
+  overflow-y: auto;
+}
+.slide.active { opacity: 1; pointer-events: auto; }
+
+.headline {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: clamp(26px, 3.8vw, 52px);
+  line-height: 1.15; letter-spacing: -0.01em;
+  color: var(--white); max-width: 26ch;
+}
+html[lang="ar"] .headline { line-height: 1.35; letter-spacing: 0; }
+.subline {
+  font-size: clamp(14px, 1.25vw, 19px);
+  font-weight: 300; line-height: 1.65;
+  color: var(--text-muted); max-width: 60ch; margin-top: 1.4vh;
+}
+html[lang="ar"] .subline { line-height: 1.8; }
+.label {
+  font-size: clamp(11px, 0.82vw, 13px);
+  font-weight: 600; letter-spacing: 0.08em;
+  color: var(--accent); margin-bottom: 1vh;
+}
+
+.grid { display: grid; gap: clamp(12px, 1.5vw, 22px); margin-top: 3.2vh; }
+.g2 { grid-template-columns: repeat(2, 1fr); }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g4 { grid-template-columns: repeat(4, 1fr); }
+.g5 { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 740px) { .g2,.g3,.g4,.g5 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .g2,.g3,.g4,.g5 { grid-template-columns: 1fr; } }
+
+.split { display: flex; gap: 4vw; align-items: flex-start; margin-top: 3.2vh; }
+.split > * { flex: 1; min-width: 0; }
+@media (max-width: 740px) { .split { flex-direction: column; } }
+
+.tile {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: clamp(16px, 1.8vw, 28px);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .tile { border-color: rgba(0,0,0,0.07); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+}
+.tile-title { font-weight: 600; font-size: clamp(14px, 1.1vw, 17px); color: var(--white); margin-bottom: 0.5vh; }
+.tile-body  { font-size: clamp(12px, 0.92vw, 14px); line-height: 1.55; color: var(--text-muted); }
+html[lang="ar"] .tile-body { line-height: 1.7; }
+
+.tile.featured { background: linear-gradient(135deg, var(--accent), #28A88A); border: none; color: #fff; }
+.tile.featured .tile-title { color: #fff; }
+.tile.featured .tile-body  { color: rgba(255,255,255,0.82); }
+.tile.featured .stat-num   { color: #fff; }
+.tile.featured .dot-list li::before { background: rgba(255,255,255,0.55); }
+
+.stat-num {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: clamp(30px, 4.2vw, 58px);
+  color: var(--accent); line-height: 1;
+}
+.stat-label { font-size: clamp(11px, 0.82vw, 13px); color: var(--text-muted); margin-top: 0.5vh; }
+
+.accent-block {
+  background: var(--accent-dim);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: clamp(14px, 1.4vw, 22px) clamp(16px, 1.6vw, 26px);
+  margin-top: 2.2vh;
+  font-size: clamp(13px, 1.02vw, 15px);
+  line-height: 1.55; color: var(--text); max-width: 62ch;
+}
+html[dir="rtl"] .accent-block {
+  border-left: none; border-right: 3px solid var(--accent);
+  border-radius: 8px 0 0 8px;
+}
+
+.dot-list { list-style: none; }
+.dot-list li {
+  position: relative; padding-inline-start: 1.2em;
+  font-size: clamp(13px, 1.02vw, 15px); line-height: 1.55;
+  color: var(--text-muted); margin-bottom: 0.65em;
+}
+html[lang="ar"] .dot-list li { line-height: 1.75; }
+.dot-list li::before {
+  content: ''; position: absolute;
+  inset-inline-start: 0; top: 0.55em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+
+.benefit-icon {
+  width: clamp(36px, 3vw, 48px); height: clamp(36px, 3vw, 48px);
+  border-radius: 10px; background: var(--accent-dim);
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(18px, 1.6vw, 24px); margin-bottom: 1.2vh; flex-shrink: 0;
+}
+
+/* ── nav ── */
+#progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); transition: width .35s ease; z-index: 101; }
+#nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: center; gap: 1.2vw;
+  padding: 1.2vh 4vw calc(env(safe-area-inset-bottom,0px) + 1.2vh);
+  z-index: 100;
+}
+.nav-btn {
+  width: 40px; height: 40px; border-radius: 50%; border: none;
+  background: var(--bg-card); color: var(--text-muted);
+  font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: color .15s, background .15s; flex-shrink: 0;
+}
+.nav-btn:hover { color: var(--accent); }
+.nav-btn:disabled { opacity: 0.25; cursor: default; }
+#counter { font-size: 12px; font-weight: 500; color: var(--text-muted); min-width: 48px; text-align: center; font-variant-numeric: tabular-nums; }
+
+/* ── language toggle ── */
+#langToggle {
+  position: fixed; top: clamp(12px, 2vh, 20px); right: clamp(16px, 3vw, 32px);
+  z-index: 102;
+  display: flex; align-items: center; gap: 0;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px; overflow: hidden;
+  font-size: 13px; font-weight: 500;
+}
+html[dir="rtl"] #langToggle { right: auto; left: clamp(16px, 3vw, 32px); }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) #langToggle { border-color: rgba(0,0,0,0.1); }
+}
+.lang-btn {
+  padding: 7px 14px; border: none; cursor: pointer;
+  background: transparent; color: var(--text-muted);
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  transition: background .15s, color .15s;
+}
+.lang-btn.active { background: var(--accent); color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- Language toggle -->
+<div id="langToggle">
+  <button class="lang-btn active" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="ar">عربي</button>
+</div>
+
+<div id="progress" style="width:0"></div>
+<div id="deck">
+
+<!-- Each slide uses data-i="N" to map to the LANG object below.
+     The inner spans/divs use data-k="key" for each text field. -->
+
+<!-- SLIDE 1 — TITLE -->
+<section class="slide active" data-i="0">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <p class="subline" data-k="sub1" style="margin-top:2vh; font-size:clamp(15px,1.4vw,21px); color:var(--text);"></p>
+  <p class="subline" data-k="sub2" style="margin-top:1.5vh;"></p>
+  <div style="display:flex; flex-wrap:wrap; gap:clamp(16px,2vw,32px); margin-top:4vh;" id="hero-pills">
+    <div class="tile" style="flex:1; min-width:160px; text-align:center; padding:clamp(14px,1.4vw,22px);">
+      <div style="font-size:clamp(22px,2.2vw,32px); font-weight:700; color:var(--accent); font-family:var(--font-display);" data-k="pill1h"></div>
+      <div class="tile-body" data-k="pill1b"></div>
+    </div>
+    <div class="tile" style="flex:1; min-width:160px; text-align:center; padding:clamp(14px,1.4vw,22px);">
+      <div style="font-size:clamp(22px,2.2vw,32px); font-weight:700; color:var(--accent); font-family:var(--font-display);" data-k="pill2h"></div>
+      <div class="tile-body" data-k="pill2b"></div>
+    </div>
+    <div class="tile" style="flex:1; min-width:160px; text-align:center; padding:clamp(14px,1.4vw,22px);">
+      <div style="font-size:clamp(22px,2.2vw,32px); font-weight:700; color:var(--accent); font-family:var(--font-display);" data-k="pill3h"></div>
+      <div class="tile-body" data-k="pill3b"></div>
+    </div>
+  </div>
+  <p style="color:var(--text-muted); font-size:clamp(11px,0.82vw,13px); margin-top:auto; padding-top:2vh;" data-k="prepared"></p>
+</section>
+
+<!-- SLIDE 2 — PROBLEM -->
+<section class="slide" data-i="1">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <p class="subline" data-k="sub"></p>
+  <div class="accent-block" data-k="accent"></div>
+</section>
+
+<!-- SLIDE 3 — SOLUTION -->
+<section class="slide" data-i="2">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <div class="grid g4" style="margin-top:3.5vh;" data-k="tiles" data-tile-layout="title-body"></div>
+</section>
+
+<!-- SLIDE 4 — BENEFITS -->
+<section class="slide" data-i="3">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <div class="grid g3" style="margin-top:3.5vh;" data-k="benefits"></div>
+</section>
+
+<!-- SLIDE 5 — HOW IT WORKS -->
+<section class="slide" data-i="4">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <div class="grid g5" style="margin-top:3.5vh;" data-k="steps"></div>
+</section>
+
+<!-- SLIDE 6 — PLATFORM -->
+<section class="slide" data-i="5">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <div class="split" data-k="platform"></div>
+</section>
+
+<!-- SLIDE 7 — AI LAYER -->
+<section class="slide" data-i="6">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <div class="split" data-k="ailayer"></div>
+</section>
+
+<!-- SLIDE 8 — WHY PARTNER -->
+<section class="slide" data-i="7">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <div class="grid g2" style="margin-top:3.5vh;" data-k="tiles" data-tile-layout="title-body"></div>
+</section>
+
+<!-- SLIDE 9 — SPONSOR MODEL -->
+<section class="slide" data-i="8">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <p class="subline" data-k="sub"></p>
+  <div class="grid g3" style="margin-top:3.5vh;" data-k="tiers"></div>
+</section>
+
+<!-- SLIDE 10 — IMPACT -->
+<section class="slide" data-i="9">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <div class="grid g4" style="margin-top:3.5vh;" data-k="stats"></div>
+  <p style="color:var(--text-muted); font-size:clamp(11px,0.82vw,13px); font-style:italic; margin-top:1.8vh;" data-k="note"></p>
+  <div class="accent-block" style="margin-top:1.8vh;" data-k="accent"></div>
+</section>
+
+<!-- SLIDE 11 — ROADMAP -->
+<section class="slide" data-i="10">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <div class="grid g4" style="margin-top:3.5vh;" data-k="phases"></div>
+</section>
+
+<!-- SLIDE 12 — THE ASK -->
+<section class="slide" data-i="11">
+  <div class="label" data-k="label"></div>
+  <h1 class="headline" data-k="headline"></h1>
+  <div class="split" data-k="ask"></div>
+</section>
+
+<!-- SLIDE 13 — CLOSE -->
+<section class="slide" data-i="12">
+  <h1 class="headline" style="max-width:22ch;" data-k="headline"></h1>
+  <p class="subline" style="margin-top:3vh; color:var(--accent); font-weight:500;" data-k="contact"></p>
+  <p class="subline" style="margin-top:1vh; font-style:italic;" data-k="thanks"></p>
+</section>
+
+</div>
+
+<nav id="nav">
+  <button class="nav-btn" id="prevBtn" aria-label="Previous">‹</button>
+  <span id="counter"></span>
+  <button class="nav-btn" id="nextBtn" aria-label="Next">›</button>
+</nav>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   LANGUAGE DATA — edit your text here
+   ═══════════════════════════════════════════════════════════════ */
+var LANG = {
+en: [
+  // 0 — Title
+  { label:"CSR Partnership Proposal", headline:"[Project Name]",
+    sub1:"A virtual school that gives every child a real education — personalised to how they learn, paced to how they grow, and priced so that sponsors can reach more kids with every dollar.",
+    sub2:"Fast learners move ahead. Kids who need more time get it. No child is held back by a classroom speed they didn't choose — and no family is held back by a fee they can't afford.",
+    pill1h:"Free", pill1b:"for every family",
+    pill2h:"Personalised", pill2b:"every child at their own pace",
+    pill3h:"Scalable", pill3b:"more impact per sponsor dollar",
+    prepared:"Prepared for [Sponsor Name] · [Month Year]" },
+  // 1 — Problem
+  { label:"The Problem", headline:"School fees lock capable kids out of an education",
+    sub:"The barrier is rarely ability — it's cost. Tuition, transport, uniforms, and materials add up to more than many households can carry. Every year of delay compounds the learning gap.",
+    accent:"Good internet access in these communities makes a rich, video-based virtual school possible. The missing piece is funding, not connectivity." },
+  // 2 — Solution
+  { label:"The Solution", headline:"A full virtual school, powered by AI and real teachers",
+    tiles:[
+      {t:"Recorded lessons", b:"Real teachers record each lesson once. The library grows every term at near-zero marginal cost."},
+      {t:"AI tutor per lesson", b:"Kids pause and ask questions — answered from that lesson's content, not generic AI."},
+      {t:"AI-graded quizzes", b:"Auto-generated from the lesson, instantly graded, feeding into each student's record."},
+      {t:"Adaptive pacing", b:"Fast learners advance sooner. Struggling students get remedial help before moving on."}
+    ] },
+  // 3 — Benefits
+  { label:"Who Benefits", headline:"Built for three audiences at once",
+    benefits:[
+      { icon:"👧", t:"For the kids", items:["Learn at their own pace — no one left behind, no one held back","Ask questions without embarrassment via AI tutor","Instant feedback on quizzes builds confidence","Weekly live sessions keep the human connection alive","A real credential they can be proud of"] },
+      { icon:"👨‍👩‍👦", t:"For the parents", items:["Zero cost — no tuition, transport, or uniform fees","Weekly progress summary via WhatsApp or SMS","Visibility into what their child is learning","Peace of mind that the curriculum is nationally aligned","A coordinator who calls if their child disengages"] },
+      { icon:"🏢", t:"For the sponsors", items:["Live dashboard with real attendance and outcome data","Auto-generated monthly PDF impact reports","Named, branded partnership visible to families","Employee engagement paths (guest lessons, mentoring)","Scales seat-by-seat — start small, expand on proof"] }
+    ] },
+  // 4 — How it works
+  { label:"How It Works", headline:"A child's week inside the virtual school",
+    steps:[
+      {n:"1",t:"Enroll",b:"Sponsor funds the seat. Family gets a free login."},
+      {n:"2",t:"Watch",b:"Child watches the day's recorded lesson."},
+      {n:"3",t:"Ask",b:"AI tutor answers questions grounded in the lesson."},
+      {n:"4",t:"Quiz",b:"Short AI-graded quiz checks understanding."},
+      {n:"5",t:"Connect",b:"Weekly live session with a real teacher and peers."}
+    ] },
+  // 5 — Platform
+  { label:"The Platform", headline:"One platform, two experiences",
+    platform:{
+      leftTitle:"Students & Families",
+      leftItems:["On-demand video lessons by grade and subject","AI tutor chat grounded in the lesson transcript","Auto-graded quizzes with instant feedback","Adaptive pacing — remedial help or faster tracks","Weekly WhatsApp/SMS summary for parents"],
+      rightTitle:"Staff & Sponsors",
+      rightItems:["Automated attendance from lesson-watch data","Quiz scores and mastery tracked per student","Early-warning alerts when a child disengages","Curriculum-alignment mapping per lesson","Live sponsor dashboard with impact reporting"]
+    } },
+  // 6 — AI Layer
+  { label:"The AI Layer", headline:"AI handles the repetitive work. People handle the judgment calls.",
+    ailayer:{
+      leftTitle:"AI does",
+      leftItems:["Answer lesson-specific student questions","Generate and grade quizzes automatically","Track attendance and progress in real time","Adapt the learning path to each child's pace","Flag disengagement for a human to follow up","Draft monthly sponsor impact reports"],
+      rightTitle:"People do",
+      rightItems:["Record lessons and set the curriculum","Run one live weekly session per class","Onboard families and handle enrollment","Step in on emotional or behavioural issues","Review any AI answer flagged as uncertain","Own the sponsor relationship"]
+    } },
+  // 7 — Why partner
+  { label:"Why Partner", headline:"A CSR investment your teams can see the impact of",
+    tiles:[
+      {t:"ESG-ready reporting",b:"Every sponsored seat produces attendance, quiz, and outcome data — ready to drop into your ESG or annual report."},
+      {t:"Visible, nameable impact",b:"Sponsor a classroom, a school, or a region — branded within the platform and in family-facing materials."},
+      {t:"Employee engagement",b:"Give staff a way in: recorded guest lessons, mentorship sessions, or volunteering as live-session hosts."},
+      {t:"Scales with your budget",b:"Start with a single classroom; expand seat-by-seat as the partnership proves out. No big up-front commitment."}
+    ] },
+  // 8 — Sponsor model
+  { label:"The Model", headline:"Sponsor a Seat",
+    sub:"Illustrative tiers — to be finalised with your team based on program costs and scale.",
+    tiers:[
+      {name:"Classroom",price:"$[X]/mo",desc:"Funds one full classroom of seats, branded within the platform.",featured:false},
+      {name:"School",price:"$[X]/mo",desc:"Funds a full school — attendance, quizzes, dashboard, and a named partnership.",featured:true},
+      {name:"Region",price:"$[X]/mo",desc:"Funds a district-wide rollout with a dedicated impact report and co-branding.",featured:false}
+    ] },
+  // 9 — Impact
+  { label:"Transparency", headline:"Sponsors see exactly what their funding produces",
+    stats:[{n:"94%",l:"Avg. lesson attendance"},{n:"82%",l:"Quiz pass rate"},{n:"1,240",l:"Active student seats"},{n:"3d",l:"Alert response time"}],
+    note:"Sample figures for illustration. Live data populates once a cohort is running.",
+    accent:"Every sponsor gets a live dashboard — attendance trends, quiz mastery by subject, at-risk student alerts, and an auto-generated monthly PDF impact report ready to share internally or publicly." },
+  // 10 — Roadmap
+  { label:"Roadmap", headline:"From pilot to full rollout",
+    phases:[
+      {n:"1",t:"Pilot",b:"One classroom, one grade. Validate lessons, AI tutor, and admin tracking end to end."},
+      {n:"2",t:"Expand",b:"Scale to a full school. Add live sessions and the parent notification layer."},
+      {n:"3",t:"Multi-school",b:"Roll out across a district. Launch sponsor dashboard and impact reporting."},
+      {n:"4",t:"Regional scale",b:"Multi-language, additional grade levels, new sponsor partnerships."}
+    ] },
+  // 11 — The Ask
+  { label:"The Ask", headline:"What we're requesting from [Sponsor Name]",
+    ask:{
+      items:[
+        {n:"1",t:"Fund [N] seats",b:"For the first [12] months, at the Classroom or School tier."},
+        {n:"2",t:"Name a pilot cohort",b:"So we can launch and prove the model together within one term."},
+        {n:"3",t:"One executive sponsor",b:"As a point of contact for reporting and, optionally, employee engagement."}
+      ],
+      returnTitle:"In return",
+      returnItems:["Named, branded impact","Live sponsor dashboard","Monthly impact reports","Employee volunteering paths","First right to expand the partnership"]
+    } },
+  // 12 — Close
+  { headline:"Let's give more kids a classroom.",
+    contact:"[Project Name] · [Founder Name] · [email@example.com] · [phone]",
+    thanks:"Thank you for considering this partnership." }
+],
+
+ar: [
+  // 0 — العنوان
+  { label:"عرض شراكة المسؤولية الاجتماعية", headline:"[اسم المشروع]",
+    sub1:"مدرسة افتراضية تمنح كل طفل تعليمًا حقيقيًا — مُخصّصًا لطريقة تعلّمه، بوتيرة تناسب نموّه، وبتكلفة تمكّن الداعمين من الوصول لعدد أكبر من الأطفال بكل ريال.",
+    sub2:"المتعلمون السريعون يتقدّمون. ومن يحتاج وقتًا أكثر يحصل عليه. لا طفل يُعاق بسرعة فصل لم يخترها — ولا عائلة تُعاق برسوم لا تستطيع تحمّلها.",
+    pill1h:"مجّاني", pill1b:"لكل عائلة",
+    pill2h:"مُخصّص", pill2b:"كل طفل بوتيرته الخاصة",
+    pill3h:"قابل للتوسّع", pill3b:"تأثير أكبر لكل ريال",
+    prepared:"مُعدّ لـ [اسم الجهة الداعمة] · [الشهر والسنة]" },
+  // 1 — المشكلة
+  { label:"المشكلة", headline:"الرسوم الدراسية تحرم أطفالًا أكفّاء من التعليم",
+    sub:"العائق نادرًا ما يكون القدرة — بل التكلفة. الرسوم والمواصلات والزيّ والمستلزمات تتراكم لتتجاوز طاقة كثير من الأسر. وكل سنة تأخير تُضاعف الفجوة التعليمية.",
+    accent:"توفّر الإنترنت الجيد في هذه المجتمعات يجعل مدرسة افتراضية غنيّة بالفيديو أمرًا ممكنًا. القطعة الناقصة هي التمويل، لا الاتصال." },
+  // 2 — الحل
+  { label:"الحل", headline:"مدرسة افتراضية متكاملة، مدعومة بالذكاء الاصطناعي ومعلمين حقيقيين",
+    tiles:[
+      {t:"دروس مسجّلة", b:"معلمون حقيقيون يسجّلون كل درس مرة واحدة. المكتبة تنمو كل فصل بتكلفة هامشية شبه معدومة."},
+      {t:"مُعلّم ذكاء اصطناعي لكل درس", b:"الأطفال يوقفون الفيديو ويسألون — الإجابة مستمدة من محتوى الدرس نفسه."},
+      {t:"اختبارات تُصحَّح تلقائيًا", b:"تُنشأ من الدرس آليًا، تُصحَّح فورًا، وتُغذّي سجلّ كل طالب."},
+      {t:"وتيرة تعلّم تكيّفية", b:"المتعلمون السريعون يتقدّمون. والمتعثرون يحصلون على دعم إضافي قبل الانتقال."}
+    ] },
+  // 3 — الفوائد
+  { label:"من يستفيد", headline:"مصمّم لثلاث فئات في آنٍ واحد",
+    benefits:[
+      { icon:"👧", t:"للأطفال", items:["يتعلّمون بوتيرتهم — لا أحد يتخلّف ولا أحد يُكبَّل","يسألون دون إحراج عبر المعلّم الذكي","تغذية راجعة فورية على الاختبارات تبني الثقة","حصص أسبوعية مباشرة تحافظ على التواصل الإنساني","شهادة حقيقية يفخرون بها"] },
+      { icon:"👨‍👩‍👦", t:"لأولياء الأمور", items:["بدون أي تكلفة — لا رسوم ولا مواصلات ولا زيّ","ملخص أسبوعي عبر واتساب أو رسالة نصية","رؤية واضحة لما يتعلّمه طفلهم","اطمئنان أن المنهج متوافق مع المعايير الوطنية","منسّق يتّصل إذا تراجع تفاعل طفلهم"] },
+      { icon:"🏢", t:"للداعمين", items:["لوحة متابعة حيّة ببيانات حضور ونتائج فعلية","تقارير أثر شهرية تُنشأ تلقائيًا بصيغة PDF","شراكة مُسمّاة وبعلامة تجارية ظاهرة للعائلات","مسارات لمشاركة الموظفين (دروس ضيوف، إرشاد)","توسّع مقعدًا بمقعد — ابدأ صغيرًا، وسّع عند الإثبات"] }
+    ] },
+  // 4 — كيف يعمل
+  { label:"كيف يعمل", headline:"أسبوع طفل داخل المدرسة الافتراضية",
+    steps:[
+      {n:"١",t:"التسجيل",b:"الداعم يموّل المقعد. العائلة تحصل على حساب مجاني."},
+      {n:"٢",t:"المشاهدة",b:"الطفل يشاهد درس اليوم المسجّل."},
+      {n:"٣",t:"السؤال",b:"المعلّم الذكي يجيب عن أسئلة مرتبطة بالدرس."},
+      {n:"٤",t:"الاختبار",b:"اختبار قصير يُصحَّح تلقائيًا يتحقق من الفهم."},
+      {n:"٥",t:"التواصل",b:"حصة أسبوعية مباشرة مع معلّم حقيقي وزملاء."}
+    ] },
+  // 5 — المنصة
+  { label:"المنصة", headline:"منصة واحدة، تجربتان مختلفتان",
+    platform:{
+      leftTitle:"الطلاب والعائلات",
+      leftItems:["دروس فيديو حسب الطلب بحسب الصف والمادة","محادثة مع معلّم ذكي مرتبطة بنص الدرس","اختبارات تُصحَّح فوريًا مع تغذية راجعة","وتيرة تكيّفية — دعم إضافي أو مسارات أسرع","ملخص أسبوعي للأهل عبر واتساب أو رسالة نصية"],
+      rightTitle:"الفريق والداعمون",
+      rightItems:["حضور تلقائي من بيانات مشاهدة الدروس","درجات الاختبارات والإتقان لكل طالب","تنبيهات مبكرة عند تراجع تفاعل الطفل","مطابقة المنهج لكل درس","لوحة متابعة حيّة للداعمين مع تقارير الأثر"]
+    } },
+  // 6 — طبقة الذكاء الاصطناعي
+  { label:"طبقة الذكاء الاصطناعي", headline:"الذكاء الاصطناعي يتولّى العمل المتكرر. والبشر يتولّون القرارات الحساسة.",
+    ailayer:{
+      leftTitle:"الذكاء الاصطناعي يقوم بـ",
+      leftItems:["الإجابة عن أسئلة الطلاب المرتبطة بالدرس","إنشاء الاختبارات وتصحيحها تلقائيًا","تتبّع الحضور والتقدّم لحظيًا","تكييف مسار التعلّم حسب وتيرة كل طفل","رصد تراجع التفاعل وإبلاغ المسؤول","إعداد مسودّات تقارير الأثر الشهرية"],
+      rightTitle:"البشر يقومون بـ",
+      rightItems:["تسجيل الدروس وتحديد المنهج","إدارة حصة أسبوعية مباشرة لكل فصل","تسجيل العائلات ومتابعة الالتحاق","التدخل في المسائل العاطفية أو السلوكية","مراجعة أي إجابة ذكية مُعلَّمة كغير مؤكدة","إدارة علاقة الداعم"]
+    } },
+  // 7 — لماذا الشراكة
+  { label:"لماذا الشراكة", headline:"استثمار مسؤولية اجتماعية يمكن لفريقكم رؤية أثره",
+    tiles:[
+      {t:"تقارير جاهزة للحوكمة البيئية والاجتماعية",b:"كل مقعد ممول يُنتج بيانات حضور واختبارات ونتائج — جاهزة لتقاريركم السنوية."},
+      {t:"أثر مرئي وقابل للتسمية",b:"ادعم فصلًا أو مدرسة أو منطقة — بعلامتك التجارية داخل المنصة وفي المواد الموجّهة للعائلات."},
+      {t:"مشاركة الموظفين",b:"امنح فريقك فرصة للمساهمة: دروس ضيوف، جلسات إرشاد، أو تطوّع في الحصص المباشرة."},
+      {t:"يتوسّع مع ميزانيتك",b:"ابدأ بفصل واحد؛ وسّع مقعدًا بمقعد مع إثبات النتائج. لا التزام مبدئي كبير."}
+    ] },
+  // 8 — نموذج الدعم
+  { label:"النموذج", headline:"ادعم مقعدًا",
+    sub:"مستويات توضيحية — تُحدَّد مع فريقكم بناءً على التكاليف الفعلية والنطاق.",
+    tiers:[
+      {name:"فصل دراسي",price:"$[X]/شهر",desc:"يموّل فصلًا كاملًا من المقاعد، بعلامتكم التجارية داخل المنصة.",featured:false},
+      {name:"مدرسة",price:"$[X]/شهر",desc:"يموّل مدرسة كاملة — حضور، اختبارات، لوحة متابعة، وشراكة مُسمّاة.",featured:true},
+      {name:"منطقة",price:"$[X]/شهر",desc:"يموّل نشرًا على مستوى المنطقة مع تقرير أثر مخصّص وعلامة تجارية مشتركة.",featured:false}
+    ] },
+  // 9 — الأثر
+  { label:"الشفافية", headline:"الداعمون يرون بالضبط ماذا يُنتج تمويلهم",
+    stats:[{n:"٩٤٪",l:"متوسط حضور الدروس"},{n:"٨٢٪",l:"نسبة اجتياز الاختبارات"},{n:"١٬٢٤٠",l:"مقعد طالب نشط"},{n:"٣ أيام",l:"وقت الاستجابة للتنبيهات"}],
+    note:"أرقام توضيحية. البيانات الفعلية تُعبّأ تلقائيًا عند بدء الفوج.",
+    accent:"كل داعم يحصل على لوحة متابعة حيّة — اتجاهات الحضور، إتقان الاختبارات حسب المادة، تنبيهات الطلاب المعرّضين للخطر، وتقرير أثر شهري بصيغة PDF جاهز للمشاركة." },
+  // 10 — خارطة الطريق
+  { label:"خارطة الطريق", headline:"من التجربة إلى الانتشار الكامل",
+    phases:[
+      {n:"١",t:"تجربة",b:"فصل واحد، صف واحد. التحقق من الدروس والمعلّم الذكي ونظام المتابعة."},
+      {n:"٢",t:"توسّع",b:"الارتقاء إلى مدرسة كاملة. إضافة الحصص المباشرة وإشعارات الأهل."},
+      {n:"٣",t:"متعدد المدارس",b:"النشر عبر منطقة. إطلاق لوحة الداعمين وتقارير الأثر."},
+      {n:"٤",t:"نطاق إقليمي",b:"دعم متعدد اللغات، صفوف إضافية، شراكات جديدة."}
+    ] },
+  // 11 — الطلب
+  { label:"الطلب", headline:"ما نطلبه من [اسم الجهة الداعمة]",
+    ask:{
+      items:[
+        {n:"١",t:"تمويل [N] مقعد",b:"لأول [12] شهرًا، على مستوى الفصل أو المدرسة."},
+        {n:"٢",t:"تسمية فوج تجريبي",b:"لنطلق المشروع ونُثبت النموذج معًا خلال فصل دراسي واحد."},
+        {n:"٣",t:"راعٍ تنفيذي واحد",b:"كنقطة اتصال للتقارير، واختياريًا لمشاركة الموظفين."}
+      ],
+      returnTitle:"في المقابل",
+      returnItems:["أثر مُسمّى وبعلامة تجارية","لوحة متابعة حيّة للداعم","تقارير أثر شهرية","مسارات تطوّع للموظفين","حق الأولوية لتوسيع الشراكة"]
+    } },
+  // 12 — الختام
+  { headline:"لنمنح المزيد من الأطفال فصلًا دراسيًا.",
+    contact:"[اسم المشروع] · [اسم المؤسس] · [email@example.com] · [الهاتف]",
+    thanks:"شكرًا لاعتباركم هذه الشراكة." }
+]
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDERING ENGINE — you should not need to edit below this
+   ═══════════════════════════════════════════════════════════════ */
+var currentLang = 'en';
+var slides = document.querySelectorAll('.slide');
+var total = slides.length;
+var idx = 0;
+
+function renderLang(lang) {
+  currentLang = lang;
+  var data = LANG[lang];
+  var root = document.documentElement;
+  root.setAttribute('lang', lang);
+  root.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+
+  slides.forEach(function(slide, si) {
+    var d = data[si]; if (!d) return;
+
+    // Simple text fields
+    slide.querySelectorAll('[data-k]').forEach(function(el) {
+      var k = el.dataset.k;
+      if (typeof d[k] === 'string') { el.textContent = d[k]; }
+    });
+
+    // Tile grids (solution, why partner)
+    var tileGrid = slide.querySelector('[data-k="tiles"]');
+    if (tileGrid && d.tiles) {
+      tileGrid.innerHTML = d.tiles.map(function(t){
+        return '<div class="tile"><div class="tile-title">'+esc(t.t)+'</div><div class="tile-body">'+esc(t.b)+'</div></div>';
+      }).join('');
+    }
+
+    // Benefits
+    var benGrid = slide.querySelector('[data-k="benefits"]');
+    if (benGrid && d.benefits) {
+      benGrid.innerHTML = d.benefits.map(function(b){
+        return '<div class="tile" style="display:flex;flex-direction:column;"><div class="benefit-icon">'+b.icon+'</div><div class="tile-title">'+esc(b.t)+'</div><ul class="dot-list" style="margin-top:0.8vh;">'+b.items.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul></div>';
+      }).join('');
+    }
+
+    // Steps
+    var stepGrid = slide.querySelector('[data-k="steps"]');
+    if (stepGrid && d.steps) {
+      stepGrid.innerHTML = d.steps.map(function(s){
+        return '<div class="tile" style="text-align:center;"><div class="stat-num" style="font-size:clamp(22px,2.2vw,34px);">'+esc(s.n)+'</div><div class="tile-title" style="margin-top:0.6vh;">'+esc(s.t)+'</div><div class="tile-body">'+esc(s.b)+'</div></div>';
+      }).join('');
+    }
+
+    // Platform split
+    var platEl = slide.querySelector('[data-k="platform"]');
+    if (platEl && d.platform) {
+      var p = d.platform;
+      platEl.innerHTML =
+        '<div class="tile featured"><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;opacity:0.85;margin-bottom:1.6vh;">'+esc(p.leftTitle)+'</div><ul class="dot-list">'+p.leftItems.map(function(i){return '<li style="color:rgba(255,255,255,0.88);">'+esc(i)+'</li>';}).join('')+'</ul></div>'+
+        '<div class="tile"><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:1.6vh;">'+esc(p.rightTitle)+'</div><ul class="dot-list">'+p.rightItems.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul></div>';
+    }
+
+    // AI layer split
+    var aiEl = slide.querySelector('[data-k="ailayer"]');
+    if (aiEl && d.ailayer) {
+      var a = d.ailayer;
+      aiEl.innerHTML =
+        '<div><div class="tile-title" style="color:var(--accent);margin-bottom:1.4vh;">'+esc(a.leftTitle)+'</div><ul class="dot-list">'+a.leftItems.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul></div>'+
+        '<div><div class="tile-title" style="margin-bottom:1.4vh;">'+esc(a.rightTitle)+'</div><ul class="dot-list">'+a.rightItems.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul></div>';
+    }
+
+    // Tiers
+    var tierGrid = slide.querySelector('[data-k="tiers"]');
+    if (tierGrid && d.tiers) {
+      tierGrid.innerHTML = d.tiers.map(function(t){
+        var cls = t.featured ? 'tile featured' : 'tile';
+        var nameColor = t.featured ? 'opacity:0.85;' : 'color:var(--text-muted);';
+        return '<div class="'+cls+'"><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;'+nameColor+'margin-bottom:0.6vh;">'+esc(t.name)+'</div><div class="stat-num">'+esc(t.price)+'</div><div class="tile-body" style="margin-top:1.2vh;">'+esc(t.desc)+'</div></div>';
+      }).join('');
+    }
+
+    // Stats
+    var statGrid = slide.querySelector('[data-k="stats"]');
+    if (statGrid && d.stats) {
+      statGrid.innerHTML = d.stats.map(function(s){
+        return '<div class="tile" style="text-align:center;"><div class="stat-num">'+esc(s.n)+'</div><div class="stat-label">'+esc(s.l)+'</div></div>';
+      }).join('');
+    }
+
+    // Phases
+    var phaseGrid = slide.querySelector('[data-k="phases"]');
+    if (phaseGrid && d.phases) {
+      phaseGrid.innerHTML = d.phases.map(function(p){
+        return '<div><div class="stat-num" style="font-size:clamp(20px,1.8vw,30px);">'+esc(p.n)+'</div><div class="tile-title" style="margin-top:0.5vh;">'+esc(p.t)+'</div><div class="tile-body" style="margin-top:0.4vh;">'+esc(p.b)+'</div></div>';
+      }).join('');
+    }
+
+    // Ask
+    var askEl = slide.querySelector('[data-k="ask"]');
+    if (askEl && d.ask) {
+      var ak = d.ask;
+      askEl.innerHTML =
+        '<div>'+ak.items.map(function(i){
+          return '<div style="display:flex;gap:clamp(10px,1vw,16px);margin-bottom:2.2vh;"><div class="stat-num" style="font-size:clamp(18px,1.6vw,26px);flex-shrink:0;width:30px;">'+esc(i.n)+'</div><div><div class="tile-title">'+esc(i.t)+'</div><div class="tile-body">'+esc(i.b)+'</div></div></div>';
+        }).join('')+'</div>'+
+        '<div class="tile featured" style="align-self:stretch;display:flex;flex-direction:column;justify-content:center;"><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;opacity:0.85;margin-bottom:1.6vh;">'+esc(ak.returnTitle)+'</div><ul class="dot-list">'+ak.returnItems.map(function(i){return '<li style="color:rgba(255,255,255,0.88);">'+esc(i)+'</li>';}).join('')+'</ul></div>';
+    }
+  });
+}
+
+function esc(s) { var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+// Language toggle
+document.getElementById('langToggle').addEventListener('click', function(e) {
+  var btn = e.target.closest('.lang-btn');
+  if (btn && btn.dataset.lang !== currentLang) { renderLang(btn.dataset.lang); }
+});
+
+// Slide navigation
+var counter = document.getElementById('counter');
+var prev = document.getElementById('prevBtn');
+var next = document.getElementById('nextBtn');
+var bar = document.getElementById('progress');
+
+function renderNav() {
+  slides.forEach(function(s,i){ s.classList.toggle('active', i===idx); });
+  counter.textContent = (idx+1)+' / '+total;
+  prev.disabled = idx===0; next.disabled = idx===total-1;
+  bar.style.width = ((idx+1)/total*100)+'%';
+  try{localStorage.setItem('vs-deck-slide',idx);}catch(e){}
+}
+function go(n){ idx=Math.max(0,Math.min(total-1,n)); renderNav(); }
+
+prev.addEventListener('click',function(){go(idx-1);});
+next.addEventListener('click',function(){go(idx+1);});
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key===' ') go(idx+1);
+  else if(e.key==='ArrowLeft') go(idx-1);
+});
+var tx=null;
+document.addEventListener('touchstart',function(e){tx=e.changedTouches[0].screenX;},{passive:true});
+document.addEventListener('touchend',function(e){
+  if(tx===null)return;
+  var d=e.changedTouches[0].screenX-tx;
+  if(Math.abs(d)>50){d<0?go(idx+1):go(idx-1);}
+  tx=null;
+},{passive:true});
+
+try{var s=parseInt(localStorage.getItem('vs-deck-slide')||'0',10); if(s>0&&s<total) idx=s;}catch(e){}
+
+renderLang('en');
+renderNav();
+</script>
+</body>
+</html>
